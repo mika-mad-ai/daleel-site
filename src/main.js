@@ -8,12 +8,17 @@ import check from '@phosphor-icons/core/assets/regular/check.svg?raw';
 import sound from '@phosphor-icons/core/assets/regular/speaker-high.svg?raw';
 import play from '@phosphor-icons/core/assets/fill/play-fill.svg?raw';
 import whatsapp from '@phosphor-icons/core/assets/regular/whatsapp-logo.svg?raw';
+import waBrand from 'simple-icons/icons/whatsapp.svg?raw';
+import lock from '@phosphor-icons/core/assets/regular/lock-simple.svg?raw';
 
 /* ===== Settings you can edit ===== */
 const WHATSAPP_NUMBER = '971501305942'; // international format, digits only
 const DEMO_TEXT = "Hi Daleel team, I'd like to learn more about how you could help the brokers in my agency close more deals. Could we book a quick demo?";
 const HIRE_TEXT = "Hi Daleel team, I'd like to hire Daleel for my agency. What are the next steps?";
 const TRIAL_TEXT = "Hi Daleel team, I'd like to start the 30-day trial for my agency. What are the next steps?";
+// Free month: secure payment page (for example a Stripe Payment Link with a 30-day trial).
+// While this is empty, the form hands the request over to the Daleel team on WhatsApp instead.
+const TRIAL_CHECKOUT_URL = '';
 const PRICE_LIST = 30000;
 const PRICE_CASE = 18000;
 /* ================================= */
@@ -27,7 +32,7 @@ window.dataLayer = window.dataLayer || [];
 const track = (event, data) => window.dataLayer.push({ event, ...data });
 
 /* icons (Phosphor) */
-const ICONS = { arrow, 'arrow-left': arrowLeft, check, sound, play, whatsapp };
+const ICONS = { arrow, 'arrow-left': arrowLeft, check, sound, play, whatsapp, lock, 'wa-brand': waBrand };
 $$('[data-icon]').forEach((el) => {
   el.innerHTML = ICONS[el.dataset.icon] || '';
   el.setAttribute('aria-hidden', 'true');
@@ -121,6 +126,7 @@ if (!reduce) {
 /* staggered groups: each child gets its index */
 $$('[data-stagger]').forEach((g) => [...g.children].forEach((c, i) => c.style.setProperty('--i', i)));
 $$('.bento .cell').forEach((c, i) => c.style.setProperty('--i', i % 3));
+$$('.vs > *').forEach((c, i) => c.style.setProperty('--i', i));
 
 /* reveal on scroll */
 if (reduce || !('IntersectionObserver' in window)) {
@@ -279,6 +285,22 @@ new ResizeObserver(railProgress).observe(rail);
   const clamp = (v) => Math.min(1, Math.max(0, v));
   const ease = (t) => t * t * (3 - 2 * t);
   let lastY = -1, lastH = 0, current = -2;
+  const stage = $('#filmStage');
+  const bento = $('.bento');
+  const cells = $$('.cell', bento);
+  let scrollPick = -1, hoverPick = -1, painted = -2;
+  const paintCells = () => {
+    const pick = hoverPick >= 0 ? hoverPick : scrollPick;
+    if (pick === painted) return;
+    painted = pick;
+    cells.forEach((c, i) => c.classList.toggle('is-active', i === pick));
+  };
+  cells.forEach((c, i) => {
+    c.addEventListener('pointerenter', (e) => { if (e.pointerType !== 'touch') { hoverPick = i; paintCells(); } });
+    // once a tile has landed, drop its entry delay so selection responds at once
+    c.addEventListener('transitionend', (e) => { if (e.propertyName === 'opacity' && c.classList.contains('in')) c.classList.add('settled'); });
+  });
+  bento.addEventListener('pointerleave', () => { hoverPick = -1; paintCells(); });
   function tick() {
     requestAnimationFrame(tick);
     const y = scrollY, vh = innerHeight;
@@ -294,6 +316,18 @@ new ResizeObserver(railProgress).observe(rail);
       const tuck = ease(clamp((vh * 0.4 - top) / (vh * 0.3)));
       el.style.setProperty('--plate', (enter * (1 - tuck)).toFixed(3));
     });
+    if (!reduce) {
+      // the film opens from a card to the full width of the page
+      const st = stage.getBoundingClientRect();
+      stage.style.setProperty('--open', ease(clamp((vh * 0.96 - st.top) / (vh * 0.6))).toFixed(3));
+      // abilities: the tiles are selected one after the other while scrolling through them
+      const br = bento.getBoundingClientRect();
+      const inView = br.top < vh * 0.62 && br.bottom > vh * 0.38;
+      // tiles are revealed from here (their hidden state is clipped, which an observer can miss)
+      cells.forEach((c) => { if (!c.classList.contains('in') && c.getBoundingClientRect().top - 80 < vh * 0.9) c.classList.add('in'); });
+      scrollPick = inView ? Math.min(cells.length - 1, Math.floor(clamp((vh * 0.62 - br.top) / (br.height * 0.92)) * cells.length)) : -1;
+      paintCells();
+    }
     if (cur !== current) {
       current = cur;
       plates.forEach((p, i) => { p.classList.toggle('on', i <= cur); p.classList.toggle('now', i === cur); });
@@ -301,4 +335,33 @@ new ResizeObserver(railProgress).observe(rail);
     }
   }
   requestAnimationFrame(tick);
+})();
+
+/* free month: WhatsApp number, then the payment step */
+(() => {
+  const form = $('#startForm');
+  const input = $('#waNumber');
+  const error = $('#waError');
+  const done = $('#startDone');
+  const clean = (v) => v.replace(/[^\d+]/g, '').replace(/(?!^)\+/g, '');
+  const valid = (v) => /^\+?\d{9,15}$/.test(v);
+  const setError = (on) => { error.hidden = !on; input.setAttribute('aria-invalid', on ? 'true' : 'false'); form.classList.toggle('has-error', on); };
+  input.addEventListener('input', () => { if (!error.hidden && valid(clean(input.value))) setError(false); });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const number = clean(input.value);
+    if (!valid(number)) { setError(true); input.focus(); return; }
+    setError(false);
+    track('free_month_submit', { payment_step: TRIAL_CHECKOUT_URL ? 'checkout' : 'whatsapp' });
+    if (TRIAL_CHECKOUT_URL) {
+      done.textContent = 'Taking you to the secure payment step.';
+      done.hidden = false;
+      window.location.href = TRIAL_CHECKOUT_URL;
+      return;
+    }
+    const text = `Hi Daleel team, I'd like to start my free month. My WhatsApp number is ${number}. Please send me the link to add a payment method.`;
+    window.open(wa(text), '_blank', 'noopener');
+    done.textContent = 'WhatsApp is opening with your request. Send the message and we will reply with the payment link.';
+    done.hidden = false;
+  });
 })();

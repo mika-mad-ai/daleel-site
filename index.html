@@ -64,16 +64,40 @@
   </section>
 </div>
 
+<!-- FREE MONTH -->
+<section class="sec floor start" id="start" data-floor="Free month" aria-labelledby="start-h">
+  <div class="start-glow" aria-hidden="true"></div>
+  <div class="wrap start-in">
+    <h2 class="reveal" id="start-h" data-split>Try <span class="logo-w"><span class="sr">Daleel</span><svg class="logo-anim" viewBox="115 425 850 230" aria-hidden="true" focusable="false"><g class="lg-mark" fill="currentColor"><polygon points="230.25 430.94 206.26 516.01 121.19 540 230.25 540"/><polygon points="206.25 563.95 230.25 649.06 230.25 540"/><polygon points="254.19 516 339.31 540 230.25 540"/></g><g fill="currentColor"><path class="lg-l" style="--n:0" d="M470,616.51V597.57l-5.21,4.7a55.34,55.34,0,1,1,0-82.21l5.21,4.7V462.63h18.87V616.51Zm-42.26-92.06a36.72,36.72,0,1,0,36.72,36.72A36.76,36.76,0,0,0,427.73,524.45Z"/><path class="lg-l" style="--n:1" d="M605.39,616.51V597.57l-5.21,4.7a55.34,55.34,0,1,1,0-82.21l5.21,4.7V505.83h18.87V616.51Zm-42.26-92.06a36.72,36.72,0,1,0,36.72,36.72A36.76,36.76,0,0,0,563.13,524.45Z"/><rect class="lg-l" style="--n:2" x="643.19" y="462.63" width="18.87" height="153.87"/><path class="lg-l" style="--n:3" d="M736,616.51a55.3,55.3,0,1,1,54.6-46.33H700.16l1.64,4.25A37,37,0,0,0,736,597.89a36.51,36.51,0,0,0,24.46-9.34h23.64A55.52,55.52,0,0,1,736,616.51Zm0-92.06a37,37,0,0,0-34.24,23.46l-1.64,4.25h71.77l-1.64-4.25A37,37,0,0,0,736,524.45Z"/><path class="lg-l" style="--n:4" d="M865.66,616.51a55.3,55.3,0,1,1,54.6-46.33H829.78l1.64,4.25a37,37,0,0,0,34.24,23.46,36.51,36.51,0,0,0,24.46-9.34h23.64A55.52,55.52,0,0,1,865.66,616.51Zm0-92.06a37,37,0,0,0-34.24,23.46l-1.64,4.25h71.77l-1.64-4.25A37,37,0,0,0,865.66,524.45Z"/><rect class="lg-l" style="--n:5" x="939.94" y="462.63" width="18.87" height="153.87"/></g></svg></span> free <em>for one month.</em></h2>
+    <form class="start-form reveal" id="startForm" novalidate>
+      <div class="prompt">
+        <label class="prompt-ic" for="waNumber"><i data-icon="whatsapp"></i><span class="sr">WhatsApp number</span></label>
+        <input id="waNumber" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your WhatsApp number" aria-describedby="startTerms waError" required>
+        <button class="btn prompt-go" type="submit"><span>Start free</span><i data-icon="arrow"></i></button>
+      </div>
+      <p class="error" id="waError" role="alert" hidden>Enter a full number with its country code, for example +971 50 123 4567.</p>
+      <p class="start-done" id="startDone" role="status" hidden></p>
+      <p class="start-terms" id="startTerms">Then <b>AED 1,500 a month</b>. You add a payment method at the next step, and nothing is charged for 30 days.</p>
+    </form>
+  </div>
+</section>
+
 <!-- FILM -->
 <section class="sec floor film" id="walkthrough" data-floor="The film" aria-labelledby="walk-h">
-  <div class="wrap film-grid">
-    <div class="film-copy reveal">
-      <p class="eyebrow">The whole buyer journey, run by AI</p>
-      <h2 id="walk-h" data-split>See Daleel <em>at work.</em></h2>
-      <p class="body">One buyer brief, sent on WhatsApp. Daleel scans the market, ranks the deals, negotiates with the seller's agent and comes back with the offer.</p>
-      <button class="btn btn-ghost" id="soundBtn" type="button"><i data-icon="sound"></i><span>Play with sound</span></button>
+  <div class="wrap">
+    <div class="film-head reveal">
+      <div>
+        <p class="eyebrow">The whole buyer journey, run by AI</p>
+        <h2 id="walk-h" data-split>See Daleel <em>at work.</em></h2>
+      </div>
+      <div class="film-side">
+        <p class="body">One buyer brief, sent on WhatsApp. Daleel scans the market, ranks the deals, negotiates with the seller's agent and comes back with the offer.</p>
+        <button class="btn btn-ghost" id="soundBtn" type="button"><i data-icon="sound"></i><span>Play with sound</span></button>
+      </div>
     </div>
-    <div class="media media-43 reveal wipe">
+  </div>
+  <div class="film-stage" id="filmStage">
+    <div class="media film-media">
       <video id="walkvid" controls playsinline muted preload="metadata" poster="/media/daleel-film-poster.jpg" aria-label="Daleel walkthrough film">
         <source src="/media/daleel-film.mp4" type="video/mp4">
       </video>
@@ -91,14 +115,14 @@
   </div>
   <div class="rail-wrap reveal">
     <ol class="rail" id="rail" data-stagger tabindex="0" aria-label="The eight steps of a deal">
-      <li class="step is-broker"><span class="who">Broker</span><span class="n">1</span><h3>Sends a buyer request</h3><p>The broker forwards the brief on WhatsApp. That is the whole handover.</p></li>
-      <li class="step"><span class="who">Daleel</span><span class="n">2</span><h3>Scans the market</h3><p>Every listing, sale and rental contract in Dubai, checked against the brief.</p></li>
-      <li class="step"><span class="who">Daleel</span><span class="n">3</span><h3>Models every unit</h3><p>Layout, floor, view, and whatever could ever block that view.</p></li>
-      <li class="step"><span class="who">Daleel</span><span class="n">4</span><h3>Ranks the deals</h3><p>Sorted on net yield, price history and fit with the client.</p></li>
-      <li class="step"><span class="who">Daleel</span><span class="n">5</span><h3>Sends the report</h3><p>The best match and the full report, sent to the client as a tracked link.</p></li>
-      <li class="step"><span class="who">Daleel</span><span class="n">6</span><h3>Negotiates with the seller's agent</h3><p>It opens with what the building really sold for.</p></li>
-      <li class="step"><span class="who">Daleel</span><span class="n">7</span><h3>Books the viewing</h3><p>One slot that works for the buyer, the seller and the broker.</p></li>
-      <li class="step is-broker"><span class="who">Broker</span><span class="n">8</span><h3>Signs the offer</h3><p>Daleel prepares the offer. The broker closes.</p></li>
+      <li class="step is-broker"><img class="step-img" src="/media/step-1.jpg" alt="A broker reading a buyer brief sent to Daleel on WhatsApp" loading="lazy" width="720" height="432"><span class="who">Broker</span><span class="n">1</span><h3>Sends a buyer request</h3><p>The broker forwards the brief on WhatsApp. That is the whole handover.</p></li>
+      <li class="step"><img class="step-img" src="/media/step-2.jpg" alt="Dubai Marina towers annotated with recent sale prices and net yield" loading="lazy" width="720" height="432"><span class="who">Daleel</span><span class="n">2</span><h3>Scans the market</h3><p>Every listing, sale and rental contract in Dubai, checked against the brief.</p></li>
+      <li class="step"><img class="step-img" src="/media/step-3.jpg" alt="A tower outlined in 3D in front of the sea view it would block" loading="lazy" width="720" height="432"><span class="who">Daleel</span><span class="n">3</span><h3>Models every unit</h3><p>Layout, floor, view, and whatever could ever block that view.</p></li>
+      <li class="step"><img class="step-img" src="/media/step-4.jpg" alt="A table ranking units on comparables, net yield and view" loading="lazy" width="720" height="432"><span class="who">Daleel</span><span class="n">4</span><h3>Ranks the deals</h3><p>Sorted on net yield, price history and fit with the client.</p></li>
+      <li class="step"><img class="step-img" src="/media/step-5.jpg" alt="An investment report sent to the client on WhatsApp" loading="lazy" width="720" height="432"><span class="who">Daleel</span><span class="n">5</span><h3>Sends the report</h3><p>The best match and the full report, sent to the client as a tracked link.</p></li>
+      <li class="step"><img class="step-img" src="/media/step-6.jpg" alt="Daleel negotiating the price with the seller's agent on WhatsApp" loading="lazy" width="720" height="432"><span class="who">Daleel</span><span class="n">6</span><h3>Negotiates with the seller's agent</h3><p>It opens with what the building really sold for.</p></li>
+      <li class="step"><img class="step-img" src="/media/step-7.jpg" alt="Keys on a reception desk as the buyer arrives for the viewing" loading="lazy" width="720" height="432"><span class="who">Daleel</span><span class="n">7</span><h3>Books the viewing</h3><p>One slot that works for the buyer, the seller and the broker.</p></li>
+      <li class="step is-broker"><img class="step-img" src="/media/step-8.jpg" alt="The broker and the buyer shaking hands" loading="lazy" width="720" height="432"><span class="who">Broker</span><span class="n">8</span><h3>Signs the offer</h3><p>Daleel prepares the offer. The broker closes.</p></li>
     </ol>
     <div class="wrap rail-ctl">
       <div class="rail-bar" aria-hidden="true"><i id="railBar"></i></div>
@@ -241,7 +265,7 @@
       <h2 id="vs-h" data-split>Same broker. Same 24 hours. <em>100 times the tasks.</em></h2>
       <p class="body">At midnight the broker sleeps. Their pipeline does not.</p>
     </div>
-    <div class="vs reveal" data-stagger role="table" aria-label="A broker alone compared with a broker with Daleel">
+    <div class="vs reveal" role="table" aria-label="A broker alone compared with a broker with Daleel">
       <div class="vs-head" role="row"><span role="columnheader">Broker alone</span><span role="columnheader">With Daleel</span></div>
       <div class="vs-row" role="row"><span role="cell">Drops leads</span><span role="cell">Never drops one</span></div>
       <div class="vs-row" role="row"><span role="cell">Up and down</span><span role="cell">Always consistent</span></div>
@@ -286,7 +310,7 @@
     <p class="body">See how Daleel turns every broker into a top performer. Live on WhatsApp by tomorrow.</p>
     <div class="row row-center">
       <a class="btn btn-lg js-wa" href="#contact" target="_blank" rel="noopener">Book a demo<i data-icon="arrow"></i></a>
-      <a class="btn btn-ghost btn-lg js-hire" href="#contact" target="_blank" rel="noopener"><i data-icon="whatsapp"></i>Hire Daleel</a>
+      <a class="btn btn-wa btn-lg js-hire" href="#contact" target="_blank" rel="noopener"><i data-icon="wa-brand"></i>Hire Daleel</a>
     </div>
     <ul class="trust" data-stagger>
       <li>30-day trial</li><li>100% money back</li><li>Live in 24h</li><li>0 commission</li>
