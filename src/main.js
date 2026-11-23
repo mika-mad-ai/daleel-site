@@ -365,3 +365,36 @@ new ResizeObserver(railProgress).observe(rail);
     done.hidden = false;
   });
 })();
+
+/* small screens: menu sheet and action dock */
+(() => {
+  const btn = document.querySelector('#menuBtn');
+  const sheet = document.querySelector('#sheet');
+  const dock = document.querySelector('#dock');
+  const setMenu = (open) => {
+    sheet.hidden = false;
+    requestAnimationFrame(() => document.body.classList.toggle('menu-open', open));
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    if (!open) setTimeout(() => { if (!document.body.classList.contains('menu-open')) sheet.hidden = true; }, 450);
+  };
+  btn.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  sheet.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { setMenu(false); btn.focus(); }
+  });
+  matchMedia('(min-width: 941px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+
+  // the dock shows once the hero is passed, and steps aside where the page already offers the same action
+  const state = { hero: true, start: false, contact: false };
+  const paint = () => {
+    const on = !state.hero && !state.start && !state.contact;
+    dock.classList.toggle('on', on);
+    dock.setAttribute('aria-hidden', on ? 'false' : 'true');
+    dock.querySelectorAll('a').forEach((a) => { a.tabIndex = on ? 0 : -1; });
+  };
+  const watch = (el, key, margin) => new IntersectionObserver((es) => { state[key] = es[0].isIntersecting; paint(); }, { rootMargin: margin }).observe(el);
+  watch(heroTrack, 'hero', '-40% 0px 0px 0px');
+  watch(document.querySelector('#startForm'), 'start', '0px');
+  watch(document.querySelector('#contact .row'), 'contact', '0px');
+})();

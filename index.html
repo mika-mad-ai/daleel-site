@@ -30,9 +30,29 @@
       <a href="#hire">Trial</a>
       <a href="#pipeline">Pipeline</a>
     </nav>
-    <a class="btn btn-sm js-hire" href="#contact" target="_blank" rel="noopener">Hire Daleel</a>
+    <a class="btn btn-sm bar-cta js-hire" href="#contact" target="_blank" rel="noopener">Hire Daleel</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Open menu"><span></span><span></span></button>
   </div>
 </header>
+
+<!-- small screens: full-screen menu and a thumb-reach action dock -->
+<div class="sheet" id="sheet" hidden>
+  <nav aria-label="Sections">
+    <a href="#start">Free month</a>
+    <a href="#walkthrough">The film</a>
+    <a href="#flow">How it works</a>
+    <a href="#demo">Demo</a>
+    <a href="#powers">Abilities</a>
+    <a href="#calc">Calculator</a>
+    <a href="#hire">Trial</a>
+    <a href="#pipeline">Pipeline</a>
+  </nav>
+  <a class="btn btn-wa btn-lg btn-wide js-hire" href="#contact" target="_blank" rel="noopener"><i data-icon="wa-brand"></i>Hire Daleel</a>
+</div>
+<div class="dock" id="dock" aria-hidden="true">
+  <a class="btn dock-main" href="#start" tabindex="-1">Start free month<i data-icon="arrow"></i></a>
+  <a class="btn btn-wa dock-wa js-hire" href="#contact" target="_blank" rel="noopener" aria-label="Hire Daleel on WhatsApp" tabindex="-1"><i data-icon="wa-brand"></i></a>
+</div>
 
 <main>
 <!-- HERO: sticky stage, the scroll drives the camera -->
