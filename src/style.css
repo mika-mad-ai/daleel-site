@@ -152,13 +152,13 @@ h3 { font-family: var(--display); font-weight: 500; font-size: 1.3rem; letter-sp
 .film-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 80px); align-items: end; margin-bottom: clamp(36px, 4.5vw, 64px); }
 .film-side .body { margin-bottom: 24px; }
 /* the stage spans the page; --open (0 to 1) is driven by the scroll and uncovers it from a card */
-.film-stage { --open: 0; width: min(1560px, 100% - 32px); margin-inline: auto; }
-.film-media { aspect-ratio: 16 / 9; box-shadow: none; border-radius: 0; background: none;
+/* sized from the page: as wide as possible while the whole 4:3 frame still fits under the nav bar */
+.film-stage { --open: 0; width: min(100% - 32px, (100vh - var(--bar-h) - 44px) * 4 / 3); width: min(100% - 32px, (100dvh - var(--bar-h) - 44px) * 4 / 3); margin-inline: auto; }
+.film-media { aspect-ratio: 4 / 3; box-shadow: none; border-radius: 0; background: none;
   clip-path: inset(calc((1 - var(--open)) * 13%) calc((1 - var(--open)) * 21%) round calc(22px + (1 - var(--open)) * 26px)); will-change: clip-path; }
-.film-media video { object-position: 50% 80%; transform: scale(calc(1.16 - var(--open) * 0.16)); will-change: transform; }
+.film-media video { transform: scale(calc(1.16 - var(--open) * 0.16)); will-change: transform; }
 @media (max-width: 900px) {
   .film-head { grid-template-columns: 1fr; align-items: start; }
-  .film-media { aspect-ratio: 4 / 3; }
 }
 @media (prefers-reduced-motion: reduce) { .film-stage { --open: 1; } }
 
@@ -495,3 +495,5 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }
 .btn-wa { background: #25d366; color: #05270f; box-shadow: 0 12px 26px -12px rgb(37 211 102 / 0.75); }
 .btn-wa:hover { background: #1fc45c; }
 .btn-wa .ic svg { width: 22px; height: 22px; }
+
+.price-big .per { font-size: 0.34em; font-weight: 400; letter-spacing: -0.01em; color: var(--ink-2); }
