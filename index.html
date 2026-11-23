@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Daleel · The AI agent that multiplies real estate brokers</title>
+  <meta name="description" content="Daleel works beside every broker in your agency, on WhatsApp. It reads every sale, rental and listing in Dubai, models every unit in 3D, ranks the best deals, negotiates, follows up and books viewings.">
+  <meta name="theme-color" content="#fbfaf8">
+  <link rel="canonical" href="https://daleel.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Daleel · The AI agent that multiplies real estate brokers">
+  <meta property="og:description" content="The AI real estate agent for Dubai. Live on WhatsApp in 24 hours.">
+  <meta property="og:image" content="https://daleel.io/media/og.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='240 240 600 600'%3E%3Crect x='240' y='240' width='600' height='600' fill='%23fff'/%3E%3Cg fill='%23000'%3E%3Cpolygon points='540 302.42 487.74 487.74 302.42 540 540 540 538.94 538.93 540 540 540 302.42'/%3E%3Cpolygon points='487.71 592.16 539.99 777.59 539.99 540 487.71 592.16'/%3E%3Cpolygon points='592.16 487.72 777.58 540 539.99 540 592.16 487.72'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preload" as="fetch" href="/data/dubai.json" crossorigin>
+</head>
+<body>
+<a class="skip" href="#walkthrough">Skip to content</a>
+
+<header class="bar" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="#top" aria-label="Daleel home">
+      <svg viewBox="115 425 850 230" aria-hidden="true"><g fill="currentColor"><polygon points="230.25 430.94 206.26 516.01 121.19 540 230.25 540"/><polygon points="206.25 563.95 230.25 649.06 230.25 540"/><polygon points="254.19 516 339.31 540 230.25 540"/><path d="M470,616.51V597.57l-5.21,4.7a55.34,55.34,0,1,1,0-82.21l5.21,4.7V462.63h18.87V616.51Zm-42.26-92.06a36.72,36.72,0,1,0,36.72,36.72A36.76,36.76,0,0,0,427.73,524.45Z"/><rect x="643.19" y="462.63" width="18.87" height="153.87"/><rect x="939.94" y="462.63" width="18.87" height="153.87"/><path d="M605.39,616.51V597.57l-5.21,4.7a55.34,55.34,0,1,1,0-82.21l5.21,4.7V505.83h18.87V616.51Zm-42.26-92.06a36.72,36.72,0,1,0,36.72,36.72A36.76,36.76,0,0,0,563.13,524.45Z"/><path d="M736,616.51a55.3,55.3,0,1,1,54.6-46.33H700.16l1.64,4.25A37,37,0,0,0,736,597.89a36.51,36.51,0,0,0,24.46-9.34h23.64A55.52,55.52,0,0,1,736,616.51Zm0-92.06a37,37,0,0,0-34.24,23.46l-1.64,4.25h71.77l-1.64-4.25A37,37,0,0,0,736,524.45Z"/><path d="M865.66,616.51a55.3,55.3,0,1,1,54.6-46.33H829.78l1.64,4.25a37,37,0,0,0,34.24,23.46,36.51,36.51,0,0,0,24.46-9.34h23.64A55.52,55.52,0,0,1,865.66,616.51Zm0-92.06a37,37,0,0,0-34.24,23.46l-1.64,4.25h71.77l-1.64-4.25A37,37,0,0,0,865.66,524.45Z"/></g></svg>
+    </a>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#flow">How it works</a>
+      <a href="#demo">Demo</a>
+      <a href="#powers">Abilities</a>
+      <a href="#calc">Calculator</a>
+      <a href="#hire">Trial</a>
+      <a href="#pipeline">Pipeline</a>
+    </nav>
+    <a class="btn btn-sm js-hire" href="#contact" target="_blank" rel="noopener">Hire Daleel</a>
+  </div>
+</header>
+
+<main>
+<!-- HERO: sticky stage, the scroll drives the camera -->
+<div class="hero-track" id="top">
+  <section class="hero" aria-label="Introduction">
+    <canvas id="city" aria-hidden="true"></canvas>
+    <div class="hero-veil" aria-hidden="true"></div>
+
+    <div class="beat beat-1" data-beat="1">
+      <h1 data-split>The AI agent that <em>multiplies</em> real estate agencies' revenue.</h1>
+      <p class="lede">Daleel works beside every broker on WhatsApp, reads every listing in Dubai and models every unit in 3D.</p>
+      <div class="row">
+        <a class="btn js-hire" href="#contact" target="_blank" rel="noopener"><i data-icon="whatsapp"></i>Hire Daleel</a>
+        <a class="btn btn-ghost" href="#walkthrough"><i data-icon="play"></i>Watch the film</a>
+      </div>
+    </div>
+
+    <div class="beat beat-2" data-beat="2" aria-hidden="true">
+      <p class="beat-h">Every tower in Dubai, <em>modelled in 3D.</em></p>
+      <p class="lede">Down to each unit's layout and what you see from its windows.</p>
+    </div>
+
+    <div class="beat beat-3" data-beat="3" aria-hidden="true">
+      <p class="beat-h">Floor 74. <em>Facing the Burj Khalifa.</em></p>
+      <p class="lede">Daleel sees inside every apartment: the layout, the view, and what could ever block it.</p>
+    </div>
+
+    <div class="hero-load" id="heroLoad" aria-hidden="true"><span></span></div>
+  </section>
+</div>
+
+<!-- FILM -->
+<section class="sec floor film" id="walkthrough" data-floor="The film" aria-labelledby="walk-h">
+  <div class="wrap film-grid">
+    <div class="film-copy reveal">
+      <p class="eyebrow">The whole buyer journey, run by AI</p>
+      <h2 id="walk-h" data-split>See Daleel <em>at work.</em></h2>
+      <p class="body">One buyer brief, sent on WhatsApp. Daleel scans the market, ranks the deals, negotiates with the seller's agent and comes back with the offer.</p>
+      <button class="btn btn-ghost" id="soundBtn" type="button"><i data-icon="sound"></i><span>Play with sound</span></button>
+    </div>
+    <div class="media media-43 reveal wipe">
+      <video id="walkvid" controls playsinline muted preload="metadata" poster="/media/daleel-film-poster.jpg" aria-label="Daleel walkthrough film">
+        <source src="/media/daleel-film.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="sec floor flow" id="flow" data-floor="How it works" aria-labelledby="flow-h">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 id="flow-h" data-split>From a buyer's request to a <em>signed offer.</em></h2>
+      <p class="body">The broker opens and closes. Daleel runs everything in between.</p>
+    </div>
+  </div>
+  <div class="rail-wrap reveal">
+    <ol class="rail" id="rail" data-stagger tabindex="0" aria-label="The eight steps of a deal">
+      <li class="step is-broker"><span class="who">Broker</span><span class="n">1</span><h3>Sends a buyer request</h3><p>The broker forwards the brief on WhatsApp. That is the whole handover.</p></li>
+      <li class="step"><span class="who">Daleel</span><span class="n">2</span><h3>Scans the market</h3><p>Every listing, sale and rental contract in Dubai, checked against the brief.</p></li>
+      <li class="step"><span class="who">Daleel</span><span class="n">3</span><h3>Models every unit</h3><p>Layout, floor, view, and whatever could ever block that view.</p></li>
+      <li class="step"><span class="who">Daleel</span><span class="n">4</span><h3>Ranks the deals</h3><p>Sorted on net yield, price history and fit with the client.</p></li>
+      <li class="step"><span class="who">Daleel</span><span class="n">5</span><h3>Sends the report</h3><p>The best match and the full report, sent to the client as a tracked link.</p></li>
+      <li class="step"><span class="who">Daleel</span><span class="n">6</span><h3>Negotiates with the seller's agent</h3><p>It opens with what the building really sold for.</p></li>
+      <li class="step"><span class="who">Daleel</span><span class="n">7</span><h3>Books the viewing</h3><p>One slot that works for the buyer, the seller and the broker.</p></li>
+      <li class="step is-broker"><span class="who">Broker</span><span class="n">8</span><h3>Signs the offer</h3><p>Daleel prepares the offer. The broker closes.</p></li>
+    </ol>
+    <div class="wrap rail-ctl">
+      <div class="rail-bar" aria-hidden="true"><i id="railBar"></i></div>
+      <div class="rail-btns">
+        <button class="round" id="railPrev" type="button" aria-label="Previous steps"><i data-icon="arrow-left"></i></button>
+        <button class="round" id="railNext" type="button" aria-label="Next steps"><i data-icon="arrow"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="sec floor demo" id="demo" data-floor="Demo" aria-labelledby="demo-h">
+  <div class="wrap">
+    <div class="head head-center reveal">
+      <h2 id="demo-h" data-split>See it on a <em>real listing.</em></h2>
+      <p class="body">Daleel's agents study one property and answer each question with its evidence on the 3D map.</p>
+    </div>
+    <div class="media media-demo reveal wipe">
+      <video id="demovid" controls playsinline muted loop preload="metadata" poster="/media/daleel-demo-poster.jpg" aria-label="Daleel product demo">
+        <source src="/media/daleel-demo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="demo-foot reveal">
+      <p>Imagine this running for every broker on your team.</p>
+      <a class="btn js-wa" href="#contact" target="_blank" rel="noopener">Book a demo<i data-icon="arrow"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ABILITIES -->
+<section class="sec floor powers" id="powers" data-floor="Abilities" aria-labelledby="powers-h">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Abilities</p>
+      <h2 id="powers-h" data-split>Six ways Daleel <em>multiplies</em> every broker.</h2>
+    </div>
+    <div class="bento">
+      <article class="cell cell-img c-a reveal">
+        <img src="/media/still-floors.jpg" alt="A tower on the Daleel 3D map with its leased floors highlighted" loading="lazy" width="1100" height="1109">
+        <div class="cell-txt"><h3>Sees inside every apartment</h3><p>The whole city modelled in 3D: every interior, every view.</p></div>
+      </article>
+      <article class="cell c-b reveal">
+        <div class="cell-txt"><h3>Researches anything you ask</h3><p>Every source in Dubai, one WhatsApp message away. Daleel answers with the proof.</p></div>
+        <ul class="tags" aria-label="Sources">
+          <li>DLD transactions</li><li>Rental contracts</li><li>Mortgage records</li><li>Live portals</li><li>Off-plan inventory</li><li>Floor plans</li><li>Zoning plans</li>
+        </ul>
+      </article>
+      <article class="cell cell-ember c-c reveal">
+        <div class="cell-txt"><h3>Finds the deal first</h3><p>The moment a property is listed anywhere, Daleel checks it. A good deal is matched to your brokers' clients before anyone else sees it.</p></div>
+      </article>
+      <article class="cell cell-img c-d reveal">
+        <img src="/media/still-whatsapp.jpg" alt="Daleel negotiating a price with a seller's agent on WhatsApp" loading="lazy" width="1100" height="710">
+        <div class="cell-txt"><h3>Closes deals on WhatsApp</h3><p>Listings, price checks, viewings and offers, right in the chat clients already use.</p></div>
+      </article>
+      <article class="cell cell-img c-e reveal">
+        <img src="/media/still-city.jpg" alt="Dubai Marina towers annotated with sale prices, net yield and verified views" loading="lazy" width="1100" height="660">
+        <div class="cell-txt"><h3>Knows every neighbourhood</h3><p>Travel time to any school, hospital or park, off-peak and at rush hour.</p></div>
+      </article>
+      <article class="cell c-f reveal">
+        <div class="cell-txt"><h3>Speaks every language, forgets nothing</h3><p>Every client in their own language, every preference remembered.</p></div>
+        <p class="langs" aria-hidden="true"><span>Hello</span><span lang="ar" dir="rtl">مرحبا</span><span lang="ru">Привет</span><span lang="zh">你好</span><span lang="fr">Bonjour</span><span lang="hi">नमस्ते</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="sec floor calc" id="calc" data-floor="Calculator" aria-labelledby="calc-h">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 id="calc-h" data-split>More deals. More revenue. <em>Same team.</em></h2>
+      <p class="body">Agencies using Daleel average 2.6 times more deals per broker, per month. Put in your own numbers.</p>
+    </div>
+    <div class="calc-grid reveal">
+      <form class="calc-form" id="calcForm" onsubmit="return false">
+        <div class="field">
+          <label for="c-br">Number of brokers</label><output id="c-br-o" for="c-br">10</output>
+          <input type="range" id="c-br" min="5" max="60" step="1" value="10">
+        </div>
+        <div class="field">
+          <label for="c-cm">Average net commission per broker, per month</label><output id="c-cm-o" for="c-cm">AED 20,000</output>
+          <input type="range" id="c-cm" min="5000" max="100000" step="1000" value="20000">
+          <p class="hint">What your agency keeps per broker, after payouts.</p>
+        </div>
+        <div class="field">
+          <label for="c-rt">Daleel multiplier</label><output id="c-rt-o" for="c-rt">×2.6</output>
+          <input type="range" id="c-rt" min="0" max="7" step="1" value="4">
+          <p class="hint">Our agencies' average is ×2.6. Be as conservative as you like.</p>
+        </div>
+        <label class="check"><input type="checkbox" id="c-case"><span>Case-study discount: AED 18,000 a month instead of 30,000</span></label>
+      </form>
+      <div class="calc-out" aria-live="polite">
+        <p class="out-label">Extra revenue per month</p>
+        <p class="out-big" id="c-rev">AED 520,000</p>
+        <p class="out-note" id="c-pay">Daleel pays for itself in about 2 days</p>
+        <dl class="out-row">
+          <div><dt>Extra per broker</dt><dd id="c-dl">AED 52,000</dd></div>
+          <div><dt>Net, after Daleel</dt><dd id="c-net">AED 490,000</dd></div>
+          <div><dt>Return</dt><dd id="c-roi">17.3×</dd></div>
+        </dl>
+        <p class="out-year" id="c-year"></p>
+        <p class="fine">Illustrative scenario based on the numbers you enter. Actual results depend on your agency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRIAL -->
+<section class="sec floor trial" id="hire" data-floor="Trial" aria-labelledby="hire-h">
+  <div class="wrap trial-grid">
+    <div class="trial-copy reveal">
+      <p class="eyebrow">30-day trial</p>
+      <h2 id="hire-h" data-split>Try Daleel for 30 days. <em>Keep it only if it pays.</em></h2>
+      <ol class="days" data-stagger>
+        <li><span class="day">Day 1</span><div><h3>Live on WhatsApp</h3><p>Brokers forward their first clients. Nothing to install.</p></div></li>
+        <li><span class="day">Days 2 to 29</span><div><h3>Daleel works your pipeline</h3><p>Research, reports, pitches, negotiation, viewings. Day and night.</p></div></li>
+        <li><span class="day">Day 30</span><div><h3>You decide</h3><p>Keep Daleel working, or stop and get every dirham back.</p></div></li>
+      </ol>
+    </div>
+    <aside class="price reveal" aria-label="Pricing">
+      <p class="out-label">First month, unlimited brokers</p>
+      <p class="price-big">AED 30,000</p>
+      <p class="price-alt">AED 18,000 for agencies that agree to a case study. Limited time.</p>
+      <ul class="ticks" data-stagger>
+        <li><i data-icon="check"></i>100% refunded if you stop on day 30</li>
+        <li><i data-icon="check"></i>No per-seat licences, add brokers freely</li>
+        <li><i data-icon="check"></i>0 commission taken on any deal</li>
+      </ul>
+      <a class="btn btn-wide js-trial" href="#contact" target="_blank" rel="noopener">Start my free trial<i data-icon="arrow"></i></a>
+      <p class="fine">Includes a monthly token allowance. Case-study discount subject to agreement. Subject to final agreed trial terms.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- WITH & WITHOUT -->
+<section class="sec floor versus" id="versus" data-floor="With and without" aria-labelledby="vs-h">
+  <div class="wrap">
+    <div class="head head-center reveal">
+      <h2 id="vs-h" data-split>Same broker. Same 24 hours. <em>100 times the tasks.</em></h2>
+      <p class="body">At midnight the broker sleeps. Their pipeline does not.</p>
+    </div>
+    <div class="vs reveal" data-stagger role="table" aria-label="A broker alone compared with a broker with Daleel">
+      <div class="vs-head" role="row"><span role="columnheader">Broker alone</span><span role="columnheader">With Daleel</span></div>
+      <div class="vs-row" role="row"><span role="cell">Drops leads</span><span role="cell">Never drops one</span></div>
+      <div class="vs-row" role="row"><span role="cell">Up and down</span><span role="cell">Always consistent</span></div>
+      <div class="vs-row" role="row"><span role="cell">Months to ramp up</span><span role="cell">Ready day one</span></div>
+      <div class="vs-row" role="row"><span role="cell">Hours of research</span><span role="cell">Seconds</span></div>
+      <div class="vs-row" role="row"><span role="cell">A few buildings</span><span role="cell">All of Dubai</span></div>
+      <div class="vs-row" role="row"><span role="cell">Leaves with clients</span><span role="cell">Book stays yours</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="sec floor pipe" id="pipeline" data-floor="Pipeline" aria-labelledby="pipe-h">
+  <div class="wrap pipe-grid">
+    <div class="pipe-copy reveal">
+      <h2 id="pipe-h" data-split>No client left <em>without a follow-up.</em></h2>
+      <p class="body">Daleel follows up. You close.</p>
+      <ul class="facts" data-stagger>
+        <li><b>24/7</b><span>Daleel follows up with every client, automatically, in their language.</span></li>
+        <li><b>08:00</b><span>It only pings the broker when it matters. One WhatsApp message, every morning.</span></li>
+        <li><b>You</b><span>The broker just acts: who to call, when, and why.</span></li>
+      </ul>
+    </div>
+    <div class="brief reveal" aria-label="Sample morning brief">
+      <p class="brief-from"><b>Daleel</b><span>08:00</span></p>
+      <p class="brief-msg">Good morning Omar. Overnight I followed up with 12 clients. 3 need you today:</p>
+      <ul class="tasks" id="tasks" data-stagger>
+        <li><label><input type="checkbox"><span><b>Call Alex before 17:00</b>Seller dropped to 2.3M. He is ready to sign.</span></label></li>
+        <li><label><input type="checkbox"><span><b>Ask James if AED 3.6M still works</b>I found 3 off-market villas for him. I will send them once he says yes.</span></label></li>
+        <li><label><input type="checkbox"><span><b>Send Sara the signed MOU</b>She opened the draft 4 times last night.</span></label></li>
+      </ul>
+      <p class="brief-count" id="taskCount">0 of 3 done</p>
+      <p class="fine">Sample clients and figures for demonstration.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec floor cta" id="contact" data-floor="Hire Daleel" aria-labelledby="cta-h">
+  <div class="wrap cta-in reveal">
+    <h2 id="cta-h" data-split>Give every broker <em>a Daleel.</em></h2>
+    <p class="body">See how Daleel turns every broker into a top performer. Live on WhatsApp by tomorrow.</p>
+    <div class="row row-center">
+      <a class="btn btn-lg js-wa" href="#contact" target="_blank" rel="noopener">Book a demo<i data-icon="arrow"></i></a>
+      <a class="btn btn-ghost btn-lg js-hire" href="#contact" target="_blank" rel="noopener"><i data-icon="whatsapp"></i>Hire Daleel</a>
+    </div>
+    <ul class="trust" data-stagger>
+      <li>30-day trial</li><li>100% money back</li><li>Live in 24h</li><li>0 commission</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div class="foot-about">
+      <a class="brand" href="#top" aria-label="Daleel home">
+        <svg viewBox="115 425 850 230" aria-hidden="true"><g fill="currentColor"><polygon points="230.25 430.94 206.26 516.01 121.19 540 230.25 540"/><polygon points="206.25 563.95 230.25 649.06 230.25 540"/><polygon points="254.19 516 339.31 540 230.25 540"/><path d="M470,616.51V597.57l-5.21,4.7a55.34,55.34,0,1,1,0-82.21l5.21,4.7V462.63h18.87V616.51Zm-42.26-92.06a36.72,36.72,0,1,0,36.72,36.72A36.76,36.76,0,0,0,427.73,524.45Z"/><rect x="643.19" y="462.63" width="18.87" height="153.87"/><rect x="939.94" y="462.63" width="18.87" height="153.87"/><path d="M605.39,616.51V597.57l-5.21,4.7a55.34,55.34,0,1,1,0-82.21l5.21,4.7V505.83h18.87V616.51Zm-42.26-92.06a36.72,36.72,0,1,0,36.72,36.72A36.76,36.76,0,0,0,563.13,524.45Z"/><path d="M736,616.51a55.3,55.3,0,1,1,54.6-46.33H700.16l1.64,4.25A37,37,0,0,0,736,597.89a36.51,36.51,0,0,0,24.46-9.34h23.64A55.52,55.52,0,0,1,736,616.51Zm0-92.06a37,37,0,0,0-34.24,23.46l-1.64,4.25h71.77l-1.64-4.25A37,37,0,0,0,736,524.45Z"/><path d="M865.66,616.51a55.3,55.3,0,1,1,54.6-46.33H829.78l1.64,4.25a37,37,0,0,0,34.24,23.46,36.51,36.51,0,0,0,24.46-9.34h23.64A55.52,55.52,0,0,1,865.66,616.51Zm0-92.06a37,37,0,0,0-34.24,23.46l-1.64,4.25h71.77l-1.64-4.25A37,37,0,0,0,865.66,524.45Z"/></g></svg>
+      </a>
+      <p>The AI real estate agent for Dubai. Daleel works beside every broker in your agency, on WhatsApp. Brokers close more deals. Your agency multiplies revenue.</p>
+      <p class="ar"><span lang="ar" dir="rtl">دليل</span> means "the guide".</p>
+    </div>
+    <nav aria-label="Product">
+      <h3>Product</h3>
+      <a href="#powers">AI agent for brokers</a>
+      <a href="#flow">From request to signed offer</a>
+      <a href="#pipeline">Follow-up and pipeline</a>
+      <a href="#versus">Daleel vs. a broker alone</a>
+    </nav>
+    <nav aria-label="Agencies">
+      <h3>For agencies</h3>
+      <a href="#calc">Revenue calculator</a>
+      <a href="#hire">30-day trial and pricing</a>
+      <a class="js-wa" href="#contact" target="_blank" rel="noopener">WhatsApp us</a>
+    </nav>
+    <nav aria-label="Follow">
+      <h3>Follow</h3>
+      <a href="https://www.linkedin.com/company/daleel-io/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://x.com/daleel_io" target="_blank" rel="noopener">X</a>
+      <a href="https://www.instagram.com/daleel.io/" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </div>
+  <div class="wrap legal">
+    <p>© 2026 Daleel Technology Limited. DIFC Commercial Licence CL13096. GA-00-SZ-01-FX-14, Level 1, Gate Avenue, South Zone, Dubai International Financial Centre, Dubai, UAE.</p>
+    <p><a href="https://daleel.io/legal/privacy-policy">Privacy policy</a><a href="https://daleel.io/legal/terms-of-service">Terms of service</a></p>
+  </div>
+</footer>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
