@@ -398,3 +398,16 @@ new ResizeObserver(railProgress).observe(rail);
   watch(document.querySelector('#startForm'), 'start', '0px');
   watch(document.querySelector('#contact .row'), 'contact', '0px');
 })();
+
+/* liquid glass: a soft highlight follows the pointer across each glass surface */
+if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce) {
+  document.querySelectorAll('.glass').forEach((el) => {
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
+      el.style.setProperty('--my', `${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
+      el.style.setProperty('--lit', '1');
+    });
+    el.addEventListener('pointerleave', () => el.style.setProperty('--lit', '0'));
+  });
+}
