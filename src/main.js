@@ -68,7 +68,7 @@ function setBeats(p) {
   document.body.classList.toggle('in-hero-deep', p > 0.2);
 }
 setBeats(0);
-import('./hero.js')
+import('./heroSequence.js')
   .then(({ initHero }) => initHero({
     canvas: $('#city'),
     track: heroTrack,
