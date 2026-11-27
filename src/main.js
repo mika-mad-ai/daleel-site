@@ -346,32 +346,42 @@ new ResizeObserver(railProgress).observe(rail);
     c.addEventListener('transitionend', (e) => { if (e.propertyName === 'opacity' && c.classList.contains('in')) c.classList.add('settled'); });
   });
   bento?.addEventListener('pointerleave', () => { hoverPick = -1; paintCells(); });
+  // a custom property is only written when its value changes (each write restyles the whole section)
+  const vars = new WeakMap();
+  const setVar = (el, name, value) => {
+    let m = vars.get(el);
+    if (!m) { m = {}; vars.set(el, m); }
+    if (m[name] === value) return;
+    m[name] = value;
+    el.style.setProperty(name, value);
+  };
   function tick() {
     requestAnimationFrame(tick);
     const y = scrollY, vh = innerHeight;
     if (y === lastY && vh === lastH) return;
     lastY = y; lastH = vh;
+    // read every position first, then write: interleaving the two would force a layout per section
+    const tops = floors.map((el) => el.getBoundingClientRect().top);
+    const stTop = stage && !reduce ? stage.getBoundingClientRect().top : 0;
+    const br = bento && !reduce ? bento.getBoundingClientRect() : null;
+    const due = br ? cells.filter((c) => !c.classList.contains('in') && c.getBoundingClientRect().top - 80 < vh * 0.9) : [];
     let cur = -1;
     floors.forEach((el, i) => {
-      const top = el.getBoundingClientRect().top;
+      const top = tops[i];
       if (top < vh * 0.55) cur = i;
       if (reduce) return;
       // plates grow as the section rises into view, then tuck away once it has landed
       const enter = ease(clamp((vh - top) / (vh * 0.45)));
       const tuck = ease(clamp((vh * 0.4 - top) / (vh * 0.3)));
-      el.style.setProperty('--plate', (enter * (1 - tuck)).toFixed(3));
+      setVar(el, '--plate', (enter * (1 - tuck)).toFixed(3));
     });
-    if (!reduce && stage) {
-      // the film opens from a card to the full width of the page
-      const st = stage.getBoundingClientRect();
-      stage.style.setProperty('--open', ease(clamp((vh * 0.96 - st.top) / (vh * 0.6))).toFixed(3));
-    }
-    if (!reduce && bento) {
+    // the film opens from a card to the full width of the page
+    if (!reduce && stage) setVar(stage, '--open', ease(clamp((vh * 0.96 - stTop) / (vh * 0.6))).toFixed(3));
+    if (br) {
       // abilities: the tiles are selected one after the other while scrolling through them
-      const br = bento.getBoundingClientRect();
       const inView = br.top < vh * 0.62 && br.bottom > vh * 0.38;
       // tiles are revealed from here (their hidden state is clipped, which an observer can miss)
-      cells.forEach((c) => { if (!c.classList.contains('in') && c.getBoundingClientRect().top - 80 < vh * 0.9) c.classList.add('in'); });
+      due.forEach((c) => c.classList.add('in'));
       scrollPick = inView ? Math.min(cells.length - 1, Math.floor(clamp((vh * 0.62 - br.top) / (br.height * 0.92)) * cells.length)) : -1;
       paintCells();
     }

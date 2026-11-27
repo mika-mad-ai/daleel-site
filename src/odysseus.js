@@ -23,7 +23,7 @@ document.querySelectorAll('.js-main').forEach(a => a.href = location.hostname ==
 const fmt = n => Math.round(n).toLocaleString('en-US');
 window.dataLayer = window.dataLayer || []; const track = (event, data) => { try { window.dataLayer.push(Object.assign({event}, data || {})); } catch (e) {} };
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-addEventListener('scroll', () => { const h = document.documentElement; $('#progress').style.width = (scrollY/(h.scrollHeight-innerHeight)*100)+'%'; }, {passive:true});
+addEventListener('scroll', () => { const h = document.documentElement; $('#progress').style.transform = 'scaleX(' + Math.min(1, scrollY/(h.scrollHeight-innerHeight)).toFixed(4) + ')'; }, {passive:true});
 
 /* ---------- greeting in many languages ---------- */
 (() => {
