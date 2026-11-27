@@ -77,12 +77,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <main>
-<!-- HERO -->
-<section class="ahero" id="top" aria-label="Introduction">
-  <div class="ahero-bg" aria-hidden="true"></div>
-  <div class="ahero-veil" aria-hidden="true"></div>
-  <div class="wrap ahero-in">
-    <div class="ahero-copy reveal">
+<!-- HERO: the same scroll-driven camera move as the main page, on a shorter scroll -->
+<div class="hero-track" id="top">
+  <section class="hero" aria-label="Introduction">
+    <canvas id="city" aria-hidden="true"></canvas>
+    <div class="hero-veil" aria-hidden="true"></div>
+
+    <div class="beat beat-1" data-beat="1">
       <p class="pill"><i></i>For real estate agents in Dubai · Programme Odysseus</p>
       <p class="greet" aria-hidden="true"><span id="greet">Hello.</span></p>
       <h1 data-split>One meeting.<br><em>6,000 AED</em><br>per month, for a year.</h1>
@@ -92,18 +93,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="btn btn-ghost" href="#flow"><i data-icon="play"></i>See Daleel at work</a>
       </div>
     </div>
-    <aside class="pay glass reveal" aria-label="Illustration of introducer payouts" aria-live="off">
+
+    <aside class="pay glass" aria-label="Illustration of introducer payouts" aria-live="off">
       <p class="pay-head"><span>Your introducer payouts</span><span id="pm">Month 1</span></p>
       <p class="pay-total"><span id="ptotal">0</span><small>AED earned</small></p>
       <ul id="plist"></ul>
       <p class="fine">For one agency at the standard 30,000 AED seat: 20% = 6,000 AED a month, over the first 12 months = 72,000 AED. Illustration.</p>
     </aside>
-  </div>
-  <div class="ticker" aria-hidden="true"><div class="tk" id="tk"></div></div>
-</section>
+
+    <div class="beat beat-2 glass" data-beat="2" aria-hidden="true">
+      <p class="beat-h">20% of every payment, <em>for 12 months.</em></p>
+      <p class="lede">Paid every quarter, on what the agency you introduced pays Daleel.</p>
+    </div>
+
+    <div class="beat beat-3 glass" data-beat="3" aria-hidden="true">
+      <p class="beat-h">You open one door. <em>Daleel does the rest.</em></p>
+      <p class="lede">We run the demo, the pilot and the closing.</p>
+    </div>
+
+    <div class="hero-load" id="heroLoad" aria-hidden="true"><span></span></div>
+  </section>
+</div>
 
 <!-- FILM -->
 <section class="sec floor film" id="walkthrough" data-floor="Meet Daleel" aria-labelledby="walk-h">
+  <div class="ticker" aria-hidden="true"><div class="tk" id="tk"></div></div>
   <div class="wrap">
     <div class="film-head reveal">
       <div>
