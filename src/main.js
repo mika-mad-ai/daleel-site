@@ -44,10 +44,47 @@ const wa = (text) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 $$('.js-hire').forEach((a) => { a.href = wa(HIRE_TEXT); });
 $$('.js-wa').forEach((a) => { a.href = wa(DEMO_TEXT); });
 $$('.js-trial').forEach((a) => { a.href = wa(TRIAL_TEXT); });
-document.addEventListener('click', (e) => {
-  const a = e.target.closest('a[href*="wa.me"]');
-  if (a) track('whatsapp_click', { section: a.closest('section, header, footer')?.id || 'page', label: a.textContent.trim() });
-});
+
+/* marketing analytics: the same dataLayer events as the live daleel.io, so the tags in the
+   Google Tag Manager container (Google Analytics, TikTok, Meta) keep firing on the same triggers.
+   The agents' page sends its own set from odysseus.js. */
+if (!document.body.classList.contains('page-agent')) {
+  const sec = (el) => { const x = el.closest('section, footer, header, .dock, .sheet'); return x ? (x.id || x.className.split(' ')[0] || x.tagName.toLowerCase()) : 'page'; };
+  const label = (el) => (el.getAttribute('aria-label') || el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60);
+  track('page_ready', { page: 'product', viewport: innerWidth < 720 ? 'mobile' : innerWidth < 1100 ? 'tablet' : 'desktop' });
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a, button');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (a.matches('.navlinks a, .sheet nav a')) track('nav_click', { target: href });
+    else if (a.classList.contains('btn')) track('cta_click', { label: label(a), section: sec(a), href });
+    if (a.classList.contains('js-hire') || a.classList.contains('js-trial')) track('hire_click', { section: sec(a), label: label(a) });
+    if (a.classList.contains('js-wa')) track('whatsapp_cta_click', { section: sec(a), label: label(a) });
+    if (/^https?:/.test(href) && !href.includes(location.hostname)) {
+      const h = new URL(href).hostname;
+      track(h.includes('whatsapp') || h.includes('wa.me') ? 'whatsapp_link_click' : 'outbound_click', { href, domain: h, section: sec(a), label: label(a) });
+    }
+    if (href.startsWith('mailto:')) track('email_link_click', { section: sec(a) });
+  }, true);
+  const seen = new Set();
+  const views = new IntersectionObserver((es) => es.forEach((x) => {
+    if (x.isIntersecting && !seen.has(x.target.id)) { seen.add(x.target.id); track('section_view', { section: x.target.id }); }
+  }), { threshold: 0.35 });
+  $$('section[id]').forEach((el) => views.observe(el));
+  const marks = [25, 50, 75, 100];
+  let next = 0;
+  addEventListener('scroll', () => {
+    const pct = ((scrollY + innerHeight) / document.documentElement.scrollHeight) * 100;
+    while (next < marks.length && pct >= marks[next]) { track('scroll_depth', { percent: marks[next] }); next += 1; }
+  }, { passive: true });
+  [15, 30, 60, 120, 300].forEach((t) => setTimeout(() => { if (document.visibilityState === 'visible') track('engaged_time', { seconds: t }); }, t * 1000));
+  const sliders = ['#c-br', '#c-cm', '#c-rt'].map((q) => $(q)).filter(Boolean);
+  let used = false;
+  sliders.forEach((el) => el.addEventListener('change', () => {
+    if (!used) { used = true; track('calculator_used'); }
+    track('calculator_values', { brokers: +$('#c-br').value, commission: +$('#c-cm').value, multiplier: +$('#c-rt').value });
+  }));
+}
 
 /* hero: 3D scene + the three text beats */
 const heroTrack = $('.hero-track');
@@ -67,6 +104,7 @@ function setBeats(p) {
   $('.hero-veil').style.opacity = (1 - Math.min(1, Math.max(0, (p - 0.1) / 0.2))).toFixed(3);
   document.body.classList.toggle('in-hero-deep', p > 0.2);
 }
+if (heroTrack) {
 setBeats(0);
 import('./heroSequence.js')
   .then(({ initHero }) => initHero({
@@ -80,10 +118,11 @@ import('./heroSequence.js')
     console.error('[daleel] 3D hero failed to start', err);
     document.body.classList.add('hero-failed');
   });
+}
 
 /* nav state */
 const bar = $('#bar');
-new IntersectionObserver((es) => bar.classList.toggle('solid', !es[0].isIntersecting), { rootMargin: '-64px 0px 0px 0px' }).observe(heroTrack);
+if (heroTrack) new IntersectionObserver((es) => bar.classList.toggle('solid', !es[0].isIntersecting), { rootMargin: '-64px 0px 0px 0px' }).observe(heroTrack);
 
 /* headlines rise line by line, like floors being stacked */
 function splitWords(node) {
@@ -152,9 +191,8 @@ function autoPlay(video) {
   }), { threshold: [0, 0.5] }).observe(video);
 }
 const walk = $('#walkvid');
-autoPlay(walk);
-autoPlay($('#demovid'));
-$('#soundBtn').addEventListener('click', () => {
+[walk, $('#demovid')].forEach((v) => v && autoPlay(v));
+$('#soundBtn')?.addEventListener('click', () => {
   walk.muted = false;
   walk.currentTime = 0;
   walk.play().catch(() => {});
@@ -163,7 +201,9 @@ $('#soundBtn').addEventListener('click', () => {
 });
 
 /* flow rail */
+(() => {
 const rail = $('#rail');
+if (!rail) return;
 const railBar = $('#railBar');
 const stepW = () => $('.step', rail).getBoundingClientRect().width + 16;
 $('#railNext').addEventListener('click', () => rail.scrollBy({ left: stepW() * 2, behavior: reduce ? 'auto' : 'smooth' }));
@@ -179,10 +219,12 @@ const railProgress = () => {
 };
 rail.addEventListener('scroll', railProgress, { passive: true });
 new ResizeObserver(railProgress).observe(rail);
+})();
 
 /* calculator (same model as the current site: extra revenue = brokers x commission x multiplier) */
 (() => {
   const br = $('#c-br'), cm = $('#c-cm'), rt = $('#c-rt'), cs = $('#c-case');
+  if (!br) return;
   const MULT = [0.5, 1, 1.5, 2, 2.6, 3, 3.5, 4];
   let price = PRICE_LIST;
   const cur = {};
@@ -232,6 +274,7 @@ new ResizeObserver(railProgress).observe(rail);
 (() => {
   const boxes = $$('#tasks input');
   const out = $('#taskCount');
+  if (!out) return;
   const paint = () => {
     const n = boxes.filter((b) => b.checked).length;
     out.textContent = n === boxes.length ? 'All done. Daleel keeps following up.' : `${n} of ${boxes.length} done`;
@@ -287,7 +330,7 @@ new ResizeObserver(railProgress).observe(rail);
   let lastY = -1, lastH = 0, current = -2;
   const stage = $('#filmStage');
   const bento = $('.bento');
-  const cells = $$('.cell', bento);
+  const cells = bento ? $$('.cell', bento) : [];
   let scrollPick = -1, hoverPick = -1, painted = -2;
   const paintCells = () => {
     const pick = hoverPick >= 0 ? hoverPick : scrollPick;
@@ -300,7 +343,7 @@ new ResizeObserver(railProgress).observe(rail);
     // once a tile has landed, drop its entry delay so selection responds at once
     c.addEventListener('transitionend', (e) => { if (e.propertyName === 'opacity' && c.classList.contains('in')) c.classList.add('settled'); });
   });
-  bento.addEventListener('pointerleave', () => { hoverPick = -1; paintCells(); });
+  bento?.addEventListener('pointerleave', () => { hoverPick = -1; paintCells(); });
   function tick() {
     requestAnimationFrame(tick);
     const y = scrollY, vh = innerHeight;
@@ -316,10 +359,12 @@ new ResizeObserver(railProgress).observe(rail);
       const tuck = ease(clamp((vh * 0.4 - top) / (vh * 0.3)));
       el.style.setProperty('--plate', (enter * (1 - tuck)).toFixed(3));
     });
-    if (!reduce) {
+    if (!reduce && stage) {
       // the film opens from a card to the full width of the page
       const st = stage.getBoundingClientRect();
       stage.style.setProperty('--open', ease(clamp((vh * 0.96 - st.top) / (vh * 0.6))).toFixed(3));
+    }
+    if (!reduce && bento) {
       // abilities: the tiles are selected one after the other while scrolling through them
       const br = bento.getBoundingClientRect();
       const inView = br.top < vh * 0.62 && br.bottom > vh * 0.38;
@@ -343,6 +388,7 @@ new ResizeObserver(railProgress).observe(rail);
   const input = $('#waNumber');
   const error = $('#waError');
   const done = $('#startDone');
+  if (!form) return;
   const clean = (v) => v.replace(/[^\d+]/g, '').replace(/(?!^)\+/g, '');
   const valid = (v) => /^\+?\d{9,15}$/.test(v);
   const setError = (on) => { error.hidden = !on; input.setAttribute('aria-invalid', on ? 'true' : 'false'); form.classList.toggle('has-error', on); };
@@ -371,6 +417,7 @@ new ResizeObserver(railProgress).observe(rail);
   const btn = document.querySelector('#menuBtn');
   const sheet = document.querySelector('#sheet');
   const dock = document.querySelector('#dock');
+  if (!btn || !sheet || !dock) return;
   const setMenu = (open) => {
     sheet.hidden = false;
     requestAnimationFrame(() => document.body.classList.toggle('menu-open', open));
@@ -394,9 +441,9 @@ new ResizeObserver(railProgress).observe(rail);
     dock.querySelectorAll('a').forEach((a) => { a.tabIndex = on ? 0 : -1; });
   };
   const watch = (el, key, margin) => new IntersectionObserver((es) => { state[key] = es[0].isIntersecting; paint(); }, { rootMargin: margin }).observe(el);
-  watch(heroTrack, 'hero', '-40% 0px 0px 0px');
-  watch(document.querySelector('#startForm'), 'start', '0px');
-  watch(document.querySelector('#contact .row'), 'contact', '0px');
+  const first = (...sels) => sels.map((q) => document.querySelector(q)).find(Boolean);
+  const spots = [[first('.hero-track', '#top'), 'hero', '-40% 0px 0px 0px'], [first('#startForm', '#signer'), 'start', '0px'], [first('#contact .row', '#go .row'), 'contact', '0px']];
+  spots.forEach(([el, key, margin]) => { if (el) watch(el, key, margin); });
 })();
 
 /* liquid glass: a soft highlight follows the pointer across each glass surface */
