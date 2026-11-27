@@ -277,16 +277,6 @@ label.bad .inp { box-shadow: inset 0 0 0 1.5px #b3261e; }
   .vstrip .btn { width: 100%; }
 }
 
-/* ---------- contact on WhatsApp, always in the bar ---------- */
-.bar-wa { flex: none; }
-@media (max-width: 940px) {
-  .bar-wa { margin-left: auto; }
-  .page-agent .bar-cta, .page-agent .menu-btn { margin-left: 0; }
-}
-@media (max-width: 760px) {
-  .bar-wa { width: 46px; height: 46px; padding: 0; }
-  .bar-wa span:not(.ic) { display: none; }
-}
 @media (max-width: 350px) { .ody { display: none; } }
 
 /* ---------- team: the call as a light glass card standing on two coral floors ---------- */

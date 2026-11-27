@@ -654,3 +654,20 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }
   transition: opacity 0.5s var(--ease), transform 0.8s var(--ease), background-size 0.7s var(--ease); transition-delay: calc(var(--i, 0) * 240ms + 430ms); }
 .vs.in .vs-row span:last-child { background-size: 3px 56%; }
 @media (prefers-reduced-motion: reduce) { .vs .vs-row span:last-child { background-size: 3px 56%; transition: none; } }
+
+/* contact on WhatsApp, always in the bar (both pages); on phones it becomes a round icon beside the menu */
+.bar-wa { flex: none; }
+@media (max-width: 940px) {
+  .bar-wa { margin-left: auto; }
+  .bar-wa ~ .bar-cta, .bar-wa ~ .menu-btn { margin-left: 0; }
+}
+@media (max-width: 760px) {
+  .bar-wa { width: 46px; height: 46px; padding: 0; }
+  .bar-wa span:not(.ic) { display: none; }
+}
+/* between tablet and desktop the links need the room: the WhatsApp button keeps only its icon */
+.navlinks a { white-space: nowrap; }
+@media (min-width: 941px) and (max-width: 1120px) {
+  .bar-wa { width: 42px; padding: 0; }
+  .bar-wa span:not(.ic) { display: none; }
+}

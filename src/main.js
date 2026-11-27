@@ -15,6 +15,7 @@ import lock from '@phosphor-icons/core/assets/regular/lock-simple.svg?raw';
 const WHATSAPP_NUMBER = '971501305942'; // international format, digits only
 const DEMO_TEXT = "Hi Daleel team, I'd like to learn more about how you could help the brokers in my agency close more deals. Could we book a quick demo?";
 const HIRE_TEXT = "Hi Daleel team, I'd like to hire Daleel for my agency. What are the next steps?";
+const TALK_TEXT = 'Hi Daleel team, I have a question about Daleel for my agency.';
 const TRIAL_TEXT = "Hi Daleel team, I'd like to start the 30-day trial for my agency. What are the next steps?";
 // Free month: secure payment page (for example a Stripe Payment Link with a 30-day trial).
 // While this is empty, the form hands the request over to the Daleel team on WhatsApp instead.
@@ -44,6 +45,7 @@ const wa = (text) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 $$('.js-hire').forEach((a) => { a.href = wa(HIRE_TEXT); });
 $$('.js-wa').forEach((a) => { a.href = wa(DEMO_TEXT); });
 $$('.js-trial').forEach((a) => { a.href = wa(TRIAL_TEXT); });
+$$('.js-talk').forEach((a) => { a.href = wa(TALK_TEXT); });
 
 /* marketing analytics: the same dataLayer events as the live daleel.io, so the tags in the
    Google Tag Manager container (Google Analytics, TikTok, Meta) keep firing on the same triggers.
