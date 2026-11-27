@@ -4,3 +4,4 @@ import './main.js';
 import '@fontsource/caveat/600.css'; // handwriting face of the typed signature
 import './agent.css';
 import './odysseus.js';
+import './agent-ui.js';

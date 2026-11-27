@@ -49,6 +49,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#refer">Refer agents</a>
     </nav>
     <a class="btn btn-ghost btn-sm bar-my js-my" href="#my" hidden>My dashboard</a>
+    <a class="btn btn-wa btn-sm bar-wa js-chat" href="#team" target="_blank" rel="noopener" aria-label="Talk to the Daleel team on WhatsApp"><i data-icon="wa-brand"></i><span>Talk to us</span></a>
     <a class="btn btn-sm bar-cta" href="#sign">Sign &amp; earn</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Open menu"><span></span><span></span></button>
   </div>
@@ -143,18 +144,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="btn btn-ghost js-chat" href="#team" target="_blank" rel="noopener">Chat now on WhatsApp</a>
       </div>
     </div>
-    <div class="tvc reveal" aria-label="Illustration of a WhatsApp video call with the Daleel team" role="img">
-      <div class="tvc-top"><div><b>Daleel team</b><span>WhatsApp video · <time id="tvc-t">00:00</time></span></div><span class="tvc-lock"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>End-to-end encrypted</span></div>
+    <div class="tvc glass reveal" aria-label="Illustration of a WhatsApp video call with the Daleel team" role="img">
       <div class="tvc-main">
         <video class="tvc-video" id="tvc-video" src="/media/team-call.mp4" muted loop playsinline preload="metadata" poster="/media/team-call-poster.jpg" aria-hidden="true"></video>
+        <p class="tvc-chip"><i></i>Daleel team<time id="tvc-t">00:00</time></p>
+        <div class="tvc-self"><svg viewBox="0 0 100 120" aria-hidden="true" fill="currentColor"><circle cx="50" cy="46" r="20"/><path d="M14 120c3-26 18-40 36-40s33 14 36 40z"/></svg><span>You</span></div>
         <div class="tvc-bubble">Hi! Happy to walk you through Odysseus. What would you like to know?</div>
-        <div class="tvc-self"><svg viewBox="0 0 100 120" aria-hidden="true"><circle cx="50" cy="46" r="20" fill="#F6F3EE" opacity=".85"/><path d="M14 120c3-26 18-40 36-40s33 14 36 40z" fill="#F6F3EE" opacity=".85"/></svg><span>You</span></div>
+  <div class="tvc-ctrl" aria-hidden="true">
+          <i><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></i>
+          <i><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></i>
+          <i class="end"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 9c-3.2 0-6.1 1-8.2 2.7-.5.4-.6 1.1-.3 1.7l1.2 2c.3.5 1 .7 1.5.5l2.6-1.1c.5-.2.8-.7.7-1.2l-.2-1.6c1.7-.5 3.7-.5 5.4 0l-.2 1.6c-.1.5.2 1 .7 1.2l2.6 1.1c.5.2 1.2 0 1.5-.5l1.2-2c.3-.6.2-1.3-.3-1.7C18.1 10 15.2 9 12 9z"/></svg></i>
+        </div>
       </div>
-      <div class="tvc-ctrl" aria-hidden="true">
-        <i><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></i>
-        <i><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></i>
-        <i class="end"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 9c-3.2 0-6.1 1-8.2 2.7-.5.4-.6 1.1-.3 1.7l1.2 2c.3.5 1 .7 1.5.5l2.6-1.1c.5-.2.8-.7.7-1.2l-.2-1.6c1.7-.5 3.7-.5 5.4 0l-.2 1.6c-.1.5.2 1 .7 1.2l2.6 1.1c.5.2 1.2 0 1.5-.5l1.2-2c.3-.6.2-1.3-.3-1.7C18.1 10 15.2 9 12 9z"/></svg></i>
-      </div>
+      <p class="tvc-foot"><span class="tvc-lock"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>End-to-end encrypted</span><span>WhatsApp video call · 15 min</span></p>
     </div>
   </div>
 </section>
@@ -212,24 +214,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><p><b>The ask:</b> "Can we give them 30 minutes this week? They come with a live demo."</p></li>
         </ol>
       </div>
-      <div class="composer glass">
+      <div class="composer glass" id="composer">
         <h3>Message to forward, with the Daleel presentation website</h3>
-        <label class="inp-label" for="p-dir">Your director's first name<input class="inp" id="p-dir" placeholder="e.g. Khalid" autocomplete="off"></label>
-        <div class="wa">
-          <div class="wa-hd"><i class="av" id="wa-av">D</i><div><b id="wa-to">Your director</b><span>online</span></div></div>
-          <div class="wa-body"><div class="msg" id="wamsg">Hi [Director], quick one. I came across Daleel, an AI real estate agent built for Dubai: it reads the entire market in real time (DLD data, every listing, social), spots underpriced units and pitches them to matched buyers on WhatsApp, in any language, 24/7. It works as an extra seat for the team and the trial period is satisfied or your money back.
+        <ol class="fsteps">
+          <li class="fs is-now">
+            <span class="fs-n" aria-hidden="true">1</span>
+            <div class="fs-b">
+              <label class="fs-l" for="p-dir">Type your director's first name</label>
+              <div class="namebar"><input id="p-dir" placeholder="e.g. Khalid" autocomplete="off" autocapitalize="words" spellcheck="false" aria-describedby="dirHint"><span class="namebar-ok" aria-hidden="true"><i data-icon="check"></i></span></div>
+              <p class="fs-hint" id="dirHint" role="status"></p>
+            </div>
+          </li>
+          <li class="fs">
+            <span class="fs-n" aria-hidden="true">2</span>
+            <div class="fs-b">
+              <p class="fs-l">Your message writes itself</p>
+              <div class="wa">
+                <div class="wa-hd"><i class="av" id="wa-av">D</i><div><b id="wa-to">Your director</b><span>online</span></div></div>
+                <div class="wa-body"><div class="msg" id="wamsg">Hi [Director], quick one. I came across Daleel, an AI real estate agent built for Dubai: it reads the entire market in real time (DLD data, every listing, social), spots underpriced units and pitches them to matched buyers on WhatsApp, in any language, 24/7. It works as an extra seat for the team and the trial period is satisfied or your money back.
 
 They offered to show us a live demo in 30 minutes. Can I set it up for this week? Here's the page: https://daleel.io/</div><div class="wa-time">10:42 <em>✓✓</em></div></div>
-        </div>
-        <div class="copyrow">
-          <a class="btn btn-wa" id="sendmsg" href="#script" target="_blank" rel="noopener"><i data-icon="wa-brand"></i>Send it on WhatsApp</a>
-          <button type="button" class="btn btn-ghost" id="copymsg">Copy message</button>
-          <button type="button" class="btn btn-ghost" id="sharepage">Share the Daleel presentation website</button>
-        </div>
-        <div class="sharebox" id="sharebox" hidden>
-          <p class="lbl">Link to the Daleel presentation website</p>
-          <div class="reflink"><input class="inp" id="sharelink" readonly aria-label="Daleel presentation link"><button type="button" class="btn btn-ghost btn-sm" id="copylink">Copy link</button><a class="btn btn-wa btn-sm" id="sharewa" href="#script" target="_blank" rel="noopener">Send on WhatsApp</a></div>
-        </div>
+              </div>
+            </div>
+          </li>
+          <li class="fs">
+            <span class="fs-n" aria-hidden="true">3</span>
+            <div class="fs-b">
+              <p class="fs-l">Send it to your director</p>
+              <div class="copyrow">
+                <a class="btn btn-wa" id="sendmsg" href="#script" target="_blank" rel="noopener"><i data-icon="wa-brand"></i>Send it on WhatsApp</a>
+                <button type="button" class="btn btn-ghost" id="copymsg">Copy message</button>
+              </div>
+              <button type="button" class="fs-more" id="sharepage">Or share the Daleel presentation website</button>
+              <div class="sharebox" id="sharebox" hidden>
+                <p class="lbl">Link to the Daleel presentation website</p>
+                <div class="reflink"><input class="inp" id="sharelink" readonly aria-label="Daleel presentation link"><button type="button" class="btn btn-ghost btn-sm" id="copylink">Copy link</button><a class="btn btn-wa btn-sm" id="sharewa" href="#script" target="_blank" rel="noopener">Send on WhatsApp</a></div>
+              </div>
+            </div>
+          </li>
+        </ol>
       </div>
     </div>
   </div>
@@ -267,6 +290,7 @@ They offered to show us a live demo in 30 minutes. Can I set it up for this week
       <p class="body">The full introducer agreement is on the left. Signing takes two minutes on the right.</p>
     </div>
     <div class="sign-grid reveal">
+      <div class="contract-box">
       <article class="contract" id="contract" tabindex="0" aria-label="Business Introducer Agreement, full text">
         <h3>Business Introducer Agreement</h3>
         <div class="meta">Version 2.0 · Realize Capital Properties L.L.C (Daleel) · Signing record <span id="ref-view">ODY-…</span></div>
@@ -285,6 +309,7 @@ They offered to show us a live demo in 30 minutes. Can I set it up for this week
         <h4>11. Electronic consent, identification and evidence</h4><p>The parties consent to electronic execution. By entering their details, typing their full legal name as their signature, ticking the acceptance checkbox and clicking “Sign &amp; download my agreement” (or a clearly equivalent button), the Introducer signs the displayed version personally, confirms the form data and accepts both Type A and Type B terms. The signed copy must record the version, form details, signature, timestamp and unique signing ID. The Company securely retains relevant signed records, checkbox consent and tracked Type B link/code linked to the signing ID, with reasonable protection against alteration.</p><p>Electronic records and counterparts may be relied on as evidence under applicable law; a separate wet-ink signature block is unnecessary. The Company must countersign electronically through an authorised signatory, identifying that signatory in the completed private copy or linked counterpart. Neither party waives a legitimate challenge to fraud, tampering or unauthorised signing. The Emirates ID, personal bank details, email delivery and activation conditions in clause 8 remain mandatory.</p>
         <div class="readhint" id="readhint">Scroll to read the full agreement<i></i></div>
       </article>
+      </div>
       <aside class="signer glass" id="signer">
         <h3>Sign online</h3>
         <p class="signhint" id="signhint">Type your full name as your signature, add your email and phone, and your signed copy downloads automatically.</p>

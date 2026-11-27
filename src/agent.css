@@ -85,19 +85,6 @@ h4 { margin: 0; }
 .tstatus.on { color: #0f6e45; }
 .tstatus.on i { background: #1fae5b; box-shadow: 0 0 0 4px rgb(31 174 91 / 0.18); }
 .tstatus.mini { font-size: 0.82rem; margin-left: 4px; }
-.tvc { justify-self: end; width: 100%; max-width: 470px; aspect-ratio: 4 / 4.7; display: flex; flex-direction: column; overflow: hidden; border-radius: 30px; background: #0b141a; color: #e9edef; box-shadow: 0 46px 90px -40px rgb(40 50 90 / 0.6), 0 14px 30px -18px rgb(18 18 20 / 0.5); }
-.tvc-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px 14px; font-size: 0.8rem; color: #9fb0ba; }
-.tvc-top b { display: block; font-family: var(--display); font-size: 1.05rem; font-weight: 500; color: #fff; }
-.tvc-lock { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
-.tvc-main { position: relative; flex: 1; min-height: 0; margin: 0 10px; overflow: hidden; border-radius: 20px; background: #111b21; }
-.tvc-video { width: 100%; height: 100%; object-fit: cover; }
-.tvc-bubble { position: absolute; left: 14px; bottom: 14px; max-width: 72%; padding: 10px 14px; border-radius: 16px 16px 16px 5px; background: rgb(255 255 255 / 0.94); color: #111b21; font-size: 0.9rem; line-height: 1.4; box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.6); }
-.tvc-self { position: absolute; right: 12px; top: 12px; width: 22%; aspect-ratio: 5 / 6; overflow: hidden; border-radius: 12px; background: #2a3942; box-shadow: 0 0 0 1px rgb(255 255 255 / 0.14); }
-.tvc-self svg { position: absolute; inset: auto 0 0 0; width: 100%; }
-.tvc-self span { position: absolute; left: 8px; bottom: 6px; font-size: 0.7rem; }
-.tvc-ctrl { display: flex; justify-content: center; gap: 14px; padding: 14px; }
-.tvc-ctrl i { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; background: #233138; }
-.tvc-ctrl .end { background: #ea0038; }
 @media (max-width: 900px) { .team-grid { grid-template-columns: minmax(0, 1fr); } .tvc { justify-self: center; } }
 
 /* ---------- how it works ---------- */
@@ -120,8 +107,6 @@ h4 { margin: 0; }
 .points li::before { content: counter(pt); font-family: var(--display); font-weight: 200; font-size: 2.6rem; line-height: 1; letter-spacing: -0.04em; color: var(--ember); }
 .points p { color: var(--ink-2); }
 .points b { font-weight: 600; color: var(--ink); }
-.composer { display: grid; gap: 16px; padding: clamp(20px, 2.6vw, 32px); border-radius: var(--r); }
-.composer .copyrow { margin-top: 0; }
 .wa { overflow: hidden; border-radius: 18px; background-color: #efeae2; background-image: radial-gradient(rgb(0 0 0 / 0.045) 1.2px, transparent 1.2px); background-size: 22px 22px; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06); }
 .wa-hd { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #f0f2f5; }
 .wa-hd .av { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; background: #dfe5e7; color: #54656f; font-style: normal; font-weight: 700; font-size: 0.9rem; }
@@ -138,15 +123,12 @@ h4 { margin: 0; }
 .demo-foot .row { flex: none; }
 
 /* ---------- sign: the agreement and the signing form ---------- */
-.sign-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 16px; align-items: start; }
-.contract { --cp: clamp(22px, 3vw, 40px); position: relative; max-height: min(82vh, 900px); overflow-y: auto; padding: var(--cp); border-radius: var(--r); background: #fff; box-shadow: inset 0 0 0 1px var(--line), var(--shadow); font-size: 0.94rem; line-height: 1.6; color: var(--ink-2); scrollbar-width: thin; }
 .contract h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 400; letter-spacing: -0.03em; color: var(--ink); }
 .contract .meta { margin: 8px 0 22px; font-size: 0.82rem; color: var(--mute); }
 .contract h4 { margin: 28px 0 10px; font-family: var(--display); font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
 .contract p { margin-bottom: 12px; }
 .contract b { color: var(--ink); }
 .contract .hl { padding: 2px 0 2px 18px; box-shadow: inset 3px 0 0 var(--ember); }
-.readhint { position: sticky; bottom: calc(var(--cp) * -1); margin: 0 calc(var(--cp) * -1) calc(var(--cp) * -1); padding: 34px 0 14px; background: linear-gradient(180deg, rgb(255 255 255 / 0), #fff 58%); text-align: center; font-size: 0.8rem; font-weight: 500; color: var(--mute); pointer-events: none; transition: opacity 0.4s; }
 .readhint.done { opacity: 0; }
 .signer { padding: clamp(22px, 2.8vw, 36px); border-radius: var(--r); }
 .signhint { margin-top: 8px; color: var(--ink-2); font-size: 0.96rem; }
@@ -181,7 +163,7 @@ label.bad .inp { box-shadow: inset 0 0 0 1.5px #b3261e; }
 .refbox-my { margin: 16px 0 0 !important; }
 .refbox-note { margin: 8px 0 0 !important; font-size: 0.84rem; }
 .invited, .preview-note { margin-top: 12px; padding: 10px 14px; border-radius: 12px; background: rgb(255 255 255 / 0.6); box-shadow: inset 0 0 0 1px var(--line); font-size: 0.86rem; color: var(--ink-2); }
-@media (max-width: 980px) { .sign-grid { grid-template-columns: minmax(0, 1fr); } .contract { max-height: 62vh; } }
+@media (max-width: 980px) { .sign-grid { grid-template-columns: minmax(0, 1fr); } .contract-box { height: 68vh; min-height: 0; } }
 @media (max-width: 520px) { .form { grid-template-columns: 1fr; } .stepper > div { padding: 8px; font-size: 0.74rem; gap: 6px; } }
 
 /* ---------- what is Daleel ---------- */
@@ -291,7 +273,112 @@ label.bad .inp { box-shadow: inset 0 0 0 1.5px #b3261e; }
   .demo-foot .row { flex: 1 1 100%; }
   .reflink .btn { flex: 1 1 auto; }
   .invite .btn { flex: 1 1 100%; }
-  .tvc { aspect-ratio: 4 / 4.9; }
   .contract { font-size: 0.9rem; }
   .vstrip .btn { width: 100%; }
 }
+
+/* ---------- contact on WhatsApp, always in the bar ---------- */
+.bar-wa { flex: none; }
+@media (max-width: 940px) {
+  .bar-wa { margin-left: auto; }
+  .page-agent .bar-cta, .page-agent .menu-btn { margin-left: 0; }
+}
+@media (max-width: 760px) {
+  .bar-wa { width: 46px; height: 46px; padding: 0; }
+  .bar-wa span:not(.ic) { display: none; }
+}
+@media (max-width: 350px) { .ody { display: none; } }
+
+/* ---------- team: the call as a light glass card standing on two coral floors ---------- */
+.tvc { justify-self: end; width: 100%; max-width: 480px; padding: 12px 12px 14px; border-radius: 34px; color: var(--ink);
+  box-shadow: var(--glass-in), 0 15px 0 -7px #f8c8b3, 0 30px 0 -15px var(--ember), 0 70px 80px -52px rgb(60 74 120 / 0.55); }
+.tvc-main { position: relative; aspect-ratio: 4 / 4.4; overflow: hidden; border-radius: 24px; background: var(--clay-2); box-shadow: 0 0 0 1px rgb(255 255 255 / 0.7); }
+.tvc-video { width: 100%; height: 100%; object-fit: cover; }
+.tvc-chip, .tvc-bubble, .tvc-ctrl, .tvc-self { -webkit-backdrop-filter: blur(16px) saturate(1.7); backdrop-filter: blur(16px) saturate(1.7); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.75), inset 0 1px 0 #fff, 0 12px 26px -14px rgb(20 24 40 / 0.55); }
+.tvc-chip { position: absolute; left: 12px; top: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 12px; border-radius: 999px; background: rgb(255 255 255 / 0.7); font-size: 0.84rem; font-weight: 600; }
+.tvc-chip i { width: 8px; height: 8px; border-radius: 50%; background: #1fae5b; animation: live 2.2s ease-out infinite; }
+@keyframes live { from { box-shadow: 0 0 0 0 rgb(31 174 91 / 0.5); } to { box-shadow: 0 0 0 9px rgb(31 174 91 / 0); } }
+.tvc-chip time { font-weight: 500; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.tvc-self { position: absolute; right: 12px; top: 12px; width: 20%; aspect-ratio: 5 / 6; overflow: hidden; border-radius: 16px; background: rgb(255 255 255 / 0.5); color: rgb(18 18 20 / 0.42); }
+.tvc-self svg { position: absolute; inset: auto 0 0 0; width: 100%; }
+.tvc-self span { position: absolute; left: 8px; top: 6px; font-size: 0.68rem; font-weight: 600; color: var(--ink-2); }
+.tvc-bubble { position: absolute; left: 12px; bottom: 82px; max-width: 78%; padding: 11px 15px; border-radius: 18px 18px 18px 6px; background: rgb(255 255 255 / 0.82); font-size: 0.92rem; line-height: 1.4; }
+.tvc-ctrl { position: absolute; left: 50%; bottom: 14px; translate: -50% 0; display: flex; gap: 8px; padding: 7px; border-radius: 999px; background: rgb(255 255 255 / 0.55); }
+.tvc-ctrl i { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: rgb(255 255 255 / 0.85); color: var(--ink); }
+.tvc-ctrl .end { background: #ea0038; color: #fff; }
+.tvc-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; padding: 12px 8px 0; font-size: 0.8rem; font-weight: 500; color: var(--mute); }
+.tvc-lock { display: inline-flex; align-items: center; gap: 6px; }
+@media (max-width: 900px) { .tvc { justify-self: center; margin-bottom: 20px; } }
+@media (prefers-reduced-motion: reduce) { .tvc-chip i { animation: none; } }
+
+/* ---------- what to say: three steps that light up in order ----------
+   1 the name field glows and types sample names until the agent types their own,
+   2 the name lands in the message, 3 the send button starts to pulse. */
+.composer { padding: clamp(20px, 2.6vw, 32px); border-radius: var(--r); }
+.composer > h3 { margin-bottom: 22px; }
+.fsteps { display: grid; gap: 22px; }
+.fs { position: relative; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; }
+/* the line that joins the steps fills with ember as they are completed */
+.fs:not(:last-child)::before, .fs:not(:last-child)::after { content: ""; position: absolute; left: 16px; top: 40px; bottom: -16px; width: 2px; border-radius: 2px; }
+.fs:not(:last-child)::before { background: rgb(18 18 20 / 0.1); }
+.fs:not(:last-child)::after { background: var(--ember); transform: scaleY(0); transform-origin: 50% 0; transition: transform 0.7s var(--ease); }
+.fs.is-done::after { transform: none; }
+.fs-n { position: relative; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: rgb(255 255 255 / 0.6); box-shadow: inset 0 0 0 1.5px #c9c5bc; font-family: var(--display); font-weight: 500; font-size: 0.95rem; color: var(--mute); transition: background-color 0.4s, color 0.4s, box-shadow 0.4s; }
+.fs.is-now .fs-n { background: #fff; color: var(--ember-ink); box-shadow: inset 0 0 0 1.5px var(--ember); }
+.fs.is-now .fs-n::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 0 rgb(223 63 0 / 0.45); animation: ring 1.8s ease-out infinite; }
+.fs.is-done .fs-n { background: var(--ember); color: #fff; box-shadow: none; }
+@keyframes ring { to { box-shadow: 0 0 0 12px rgb(223 63 0 / 0); } }
+.fs-l { display: block; margin-bottom: 10px; padding-top: 5px; font-family: var(--display); font-weight: 500; font-size: 1.05rem; letter-spacing: -0.01em; color: var(--mute); transition: color 0.4s; }
+.fs.is-now .fs-l, .fs.is-done .fs-l { color: var(--ink); }
+.fs-b > :not(.fs-l) { transition: opacity 0.5s var(--ease), filter 0.5s var(--ease); }
+.fs:not(.is-now):not(.is-done) .fs-b > :not(.fs-l) { opacity: 0.55; filter: saturate(0.5); }
+/* the field: same moving light as the free-month field on the main page */
+.namebar { --spin: 0deg; position: relative; display: flex; align-items: center; height: 64px; padding: 0 14px 0 22px; border-radius: 999px; border: 1.5px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box, conic-gradient(from var(--spin), #ff7a45, #f8c8b3 22%, #a9c3fa 50%, #dfe8fb 72%, #ff7a45) border-box;
+  box-shadow: 0 24px 50px -28px rgb(92 120 200 / 0.55), 0 14px 30px -20px rgb(223 63 0 / 0.5); animation: spin 6s linear infinite; transition: box-shadow 0.4s var(--ease), transform 0.4s var(--ease); }
+.namebar:focus-within { transform: translateY(-1px); box-shadow: 0 28px 56px -26px rgb(92 120 200 / 0.6), 0 18px 34px -18px rgb(223 63 0 / 0.55), 0 0 0 5px rgb(223 63 0 / 0.1); }
+.namebar input { flex: 1; min-width: 0; height: 100%; padding: 0; border: 0; outline: none; background: none; font-family: var(--display); font-weight: 400; font-size: clamp(1.2rem, 2vw, 1.5rem); letter-spacing: -0.02em; color: var(--ink); }
+.namebar input::placeholder { color: #8a877f; font-weight: 300; }
+.namebar-ok { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--ember); transform: scale(0); transition: transform 0.5s var(--ease); }
+.namebar-ok svg { width: 18px; height: 18px; fill: #fff; }
+.namebar.filled { animation-play-state: paused; }
+.namebar.filled .namebar-ok { transform: none; }
+.namebar.nudge { animation: nudge 0.5s var(--ease); }
+@keyframes nudge { 20% { transform: translateX(-7px); } 45% { transform: translateX(6px); } 70% { transform: translateX(-3px); } }
+.fs-hint { min-height: 1.3em; margin-top: 8px; font-size: 0.86rem; font-weight: 500; color: var(--ember-ink); }
+.fs-hint:empty { min-height: 0; margin: 0; }
+/* the name inside the message */
+.tok { padding: 1px 6px; border-radius: 7px; background: #fff; color: var(--ember-ink); font-weight: 600; box-shadow: 0 0 0 1.5px rgb(223 63 0 / 0.35), 0 0 16px rgb(223 63 0 / 0.25); transition: box-shadow 0.4s; }
+.tok.is-ghost { color: #b9755a; box-shadow: 0 0 0 1.5px rgb(223 63 0 / 0.2); }
+.tok.is-empty { color: #8a877f; font-weight: 500; box-shadow: 0 0 0 1.5px rgb(18 18 20 / 0.18); }
+.tok.pop { animation: tok-pop 0.35s var(--ease); }
+@keyframes tok-pop { from { box-shadow: 0 0 0 5px rgb(223 63 0 / 0.3), 0 0 26px rgb(223 63 0 / 0.5); } }
+.wa .msg { position: relative; overflow: hidden; }
+.wa .msg.sheen::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.85) 50%, transparent 65%); transform: translateX(-100%); animation: sheen 0.9s var(--ease); pointer-events: none; }
+@keyframes sheen { to { transform: translateX(100%); } }
+.composer .copyrow { margin-top: 0; }
+.fs.is-now #sendmsg { animation: send-ring 1.8s ease-out infinite; }
+@keyframes send-ring { from { box-shadow: 0 12px 26px -12px rgb(37 211 102 / 0.75), 0 0 0 0 rgb(37 211 102 / 0.55); } to { box-shadow: 0 12px 26px -12px rgb(37 211 102 / 0.75), 0 0 0 14px rgb(37 211 102 / 0); } }
+.fs-more { margin-top: 14px; padding: 0; border: 0; background: none; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
+.fs-more:hover { color: var(--ember-ink); }
+.sharebox { margin-top: 14px; }
+@media (max-width: 760px) {
+  .fs { grid-template-columns: 28px minmax(0, 1fr); gap: 10px; }
+  .fs-n { width: 28px; height: 28px; font-size: 0.85rem; }
+  .fs:not(:last-child)::before, .fs:not(:last-child)::after { left: 13px; top: 34px; }
+  .fs-l { padding-top: 2px; }
+  .namebar { height: 58px; padding-left: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .namebar, .fs.is-now .fs-n::after, .fs.is-now #sendmsg, .tok.pop, .wa .msg.sheen::after, .namebar.nudge { animation: none; }
+}
+
+/* ---------- sign: the agreement and the signing panel share one height ----------
+   The agreement scrolls inside a box; its scrollbar stops short of the rounded corners. */
+.sign-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 16px; align-items: stretch; }
+.contract-box { position: relative; min-height: 560px; overflow: hidden; border-radius: var(--r); background: #fff; box-shadow: inset 0 0 0 1px var(--line), var(--shadow); }
+.contract { --cp: clamp(22px, 3vw, 40px); --inset: 18px; position: absolute; inset: var(--inset) 6px var(--inset) 0; overflow-y: auto; overscroll-behavior: contain; padding: calc(var(--cp) - var(--inset)) calc(var(--cp) - 6px) calc(var(--cp) - var(--inset)) var(--cp); font-size: 0.94rem; line-height: 1.6; color: var(--ink-2); scrollbar-width: thin; scrollbar-color: #cfcbc2 transparent; }
+.contract:focus-visible { outline: none; }
+.contract-box:has(.contract:focus-visible) { box-shadow: inset 0 0 0 2px var(--ember), var(--shadow); }
+.readhint { position: sticky; bottom: calc((var(--cp) - var(--inset)) * -1); margin-bottom: calc((var(--cp) - var(--inset)) * -1); padding: 36px 0 6px; background: linear-gradient(180deg, rgb(255 255 255 / 0), #fff 60%); text-align: center; font-size: 0.8rem; font-weight: 500; color: var(--mute); pointer-events: none; transition: opacity 0.4s; }
+@media (max-width: 980px) { .sign-grid { grid-template-columns: minmax(0, 1fr); } .contract-box { height: 68vh; min-height: 0; } }
